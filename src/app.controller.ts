@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UserModel } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,7 +13,7 @@ export class AppController {
   @Post('users')
   createUser() {
     return this.userRepository.save({
-      // title: 'test title',
+      // role: 'another role'
     });
   }
 
@@ -27,10 +27,14 @@ export class AppController {
     const user = await this.userRepository.findOne({
       where: { id: +id },
     });
-    console.log(user);
     return this.userRepository.save({
       ...user,
       title: `${user.title}0`,
     });
+  }
+
+  @Delete('users/:id')
+  async deleteUser(@Param('id') id: string) {
+    return await this.userRepository.delete(id);
   }
 }

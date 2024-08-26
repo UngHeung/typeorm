@@ -8,6 +8,11 @@ import {
   VersionColumn,
 } from 'typeorm';
 
+export enum Role {
+  USER = 'user',
+  ADMIN = 'admin',
+}
+
 @Entity()
 export class UserModel {
   // @PrimaryGeneratedColumn()
@@ -36,6 +41,13 @@ export class UserModel {
     unique: false, // 컬럼 중 유일한 값이어야 하는지 여부
   })
   title: string;
+
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.USER,
+  })
+  role: Role;
 
   // 데이터가 생성되는 날짜, 시간이 자동으로 입력
   @CreateDateColumn()
