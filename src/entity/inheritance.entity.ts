@@ -1,15 +1,7 @@
 // 1. 상속 시 상속받은 클래스들이 각각 개별의 테이블을 생성
 // 2. 하나의 테이블로 모든 entity들을 관리
 
-import {
-  ChildEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  TableInheritance,
-  UpdateDateColumn,
-} from 'typeorm';
+import { ChildEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, TableInheritance, UpdateDateColumn } from 'typeorm';
 
 export class BaseModel {
   @PrimaryGeneratedColumn()
