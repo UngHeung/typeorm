@@ -4,10 +4,26 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './entity/user.entity';
 import { StudentModel, TeacherModel } from './entity/person.entity';
+import {
+  AirplaneModel,
+  BookModel,
+  CarModel,
+  ComputerModel,
+  SingleBaseModel,
+} from './entity/inheritance.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserModel, StudentModel, TeacherModel]),
+    TypeOrmModule.forFeature([
+      UserModel,
+      StudentModel,
+      TeacherModel,
+      BookModel,
+      CarModel,
+      SingleBaseModel,
+      AirplaneModel,
+      ComputerModel,
+    ]),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: '127.0.0.1',
@@ -15,7 +31,16 @@ import { StudentModel, TeacherModel } from './entity/person.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'study',
-      entities: [UserModel, StudentModel, TeacherModel],
+      entities: [
+        UserModel,
+        StudentModel,
+        TeacherModel,
+        BookModel,
+        CarModel,
+        SingleBaseModel,
+        AirplaneModel,
+        ComputerModel,
+      ],
       synchronize: true,
     }),
   ],
