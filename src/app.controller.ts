@@ -30,7 +30,6 @@ export class AppController {
   getUsers() {
     return this.userRepository.find({
       relations: {
-        profile: true,
         posts: true,
       },
     });
@@ -56,14 +55,17 @@ export class AppController {
   async createUserAndProfile() {
     const user = await this.userRepository.save({
       email: 'profileTest@test.com',
+      profile: {
+        profileImg: 'profileTest.jpg',
+      },
     });
 
-    const profile = await this.profileRepository.save({
-      profileImg: 'test.jpg',
-      user,
-    });
+    // const profile = await this.profileRepository.save({
+    //   profileImg: 'test.jpg',
+    //   user,
+    // });
 
-    return profile;
+    return user;
   }
 
   @Post('/users/post')

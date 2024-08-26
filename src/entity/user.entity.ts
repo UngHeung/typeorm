@@ -68,7 +68,12 @@ export class UserModel {
   @Generated() // 'uuid' -> 생성할 때마다 uuid 입력
   additionalId: number;
 
-  @OneToOne(() => ProfileModel, (profile) => profile.user)
+  @OneToOne(() => ProfileModel, (profile) => profile.user, {
+    // find() 실행 시 해당 ralation을 항상 같이 가져온다.
+    eager: true,
+    // 저장 시 relation도 같이 함께 저장된다.
+    cascade: true,
+  })
   profile: ProfileModel;
 
   @OneToMany(() => PostModel, (post) => post.author)
