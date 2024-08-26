@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   VersionColumn,
 } from 'typeorm';
+import { ProfileModel } from './profile.entity';
 
 export enum Role {
   USER = 'user',
@@ -40,7 +42,7 @@ export class UserModel {
     default: 'default value', // 값 미입력시 기본으로 입력되는 값
     unique: false, // 컬럼 중 유일한 값이어야 하는지 여부
   })
-  title: string;
+  email: string;
 
   @Column({
     type: 'enum',
@@ -63,4 +65,7 @@ export class UserModel {
   @Column()
   @Generated() // 'uuid' -> 생성할 때마다 uuid 입력
   additionalId: number;
+
+  @OneToOne(() => ProfileModel, (profile) => profile.user)
+  profile: ProfileModel;
 }
