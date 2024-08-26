@@ -71,6 +71,6 @@ export class UserModel {
   @OneToOne(() => ProfileModel, (profile) => profile.user)
   profile: ProfileModel;
 
-  @OneToMany(() => PostModel, (post) => post.author, { eager: true })
+  @OneToMany(() => PostModel, (post) => post.author)
   posts: PostModel[];
 }
