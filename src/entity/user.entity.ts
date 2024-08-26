@@ -38,6 +38,6 @@ export class UserModel {
 
   // 데이터를 생성할 때마다 1씩 올라가는 값
   @Column()
-  @Generated('increment') // 'uuid' -> 생성할 때마다 uuid 입력
+  @Generated() // 'uuid' -> 생성할 때마다 uuid 입력
   additionalId: number;
 }
