@@ -68,6 +68,11 @@ export class AppController {
     return user;
   }
 
+  @Delete('/user/profile/:id')
+  async deleteProfile(@Param('id') id: string) {
+    await this.profileRepository.delete(+id);
+  }
+
   @Post('/users/post')
   async createUserAndPost() {
     const user = await this.userRepository.save({
