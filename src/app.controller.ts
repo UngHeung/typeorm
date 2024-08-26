@@ -19,14 +19,14 @@ export class AppController {
     private tagRepository: Repository<TagModel>,
   ) {}
 
-  @Post('users')
+  @Post('/users')
   createUser() {
     return this.userRepository.save({
       // role: 'another role'
     });
   }
 
-  @Get('users')
+  @Get('/users')
   getUsers() {
     return this.userRepository.find({
       relations: {
@@ -36,7 +36,7 @@ export class AppController {
     });
   }
 
-  @Patch('users/:id')
+  @Patch('/users/:id')
   async patchUser(@Param('id') id: string) {
     const user = await this.userRepository.findOne({
       where: { id: +id },
@@ -47,12 +47,12 @@ export class AppController {
     });
   }
 
-  @Delete('users/:id')
+  @Delete('/users/:id')
   async deleteUser(@Param('id') id: string) {
     return await this.userRepository.delete(id);
   }
 
-  @Post('users/profile')
+  @Post('/users/profile')
   async createUserAndProfile() {
     const user = await this.userRepository.save({
       email: 'profileTest@test.com',
@@ -66,7 +66,7 @@ export class AppController {
     return profile;
   }
 
-  @Post('users/post')
+  @Post('/users/post')
   async createUserAndPost() {
     const user = await this.userRepository.save({
       email: 'postTest@test.com',
@@ -83,7 +83,7 @@ export class AppController {
     });
   }
 
-  @Post('posts/tags')
+  @Post('/posts/tags')
   async createPostsTags() {
     const post1 = await this.postRepository.save({
       title: 'NestJS',
@@ -107,6 +107,8 @@ export class AppController {
       title: 'NextJS',
       tags: [tag1, tag2],
     });
+
+    return true;
   }
 
   @Get('/posts')
