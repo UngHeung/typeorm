@@ -25,11 +25,12 @@ export class AppController {
   @Patch('users/:id')
   async patchUser(@Param('id') id: string) {
     const user = await this.userRepository.findOne({
-      where: { id: parseInt(id) },
+      where: { id: +id },
     });
+    console.log(user);
     return this.userRepository.save({
       ...user,
-      title: 'update title',
+      title: `${user.title}0`,
     });
   }
 }
