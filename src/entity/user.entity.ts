@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -73,7 +74,17 @@ export class UserModel {
     eager: true,
     // 저장 시 relation도 같이 함께 저장된다.
     cascade: true,
+    // null이 가능한지 여부
+    nullable: true,
+    // 관계 삭제 시
+    // no action -> 아무 일도 일어나지 않음
+    // casecade -> 참조하는 row도 같이 삭제
+    // set null -> 참조하는 row에서 참조 id를 null로 변경
+    // set default -> 기본 세팅으로 설정(테이블 기본 설정)
+    // restrict -> 참조하는 row가 있는 경후 참조당하는 row 삭제 불가
+    onDelete: 'CASCADE',
   })
+  @JoinColumn()
   profile: ProfileModel;
 
   @OneToMany(() => PostModel, (post) => post.author)
