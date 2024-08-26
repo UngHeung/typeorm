@@ -23,7 +23,18 @@ export class UserModel {
   // UUID -> 겹치지 않는 고유 ID가 생성된다.
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+
+  // 제목
+  @Column({
+    type: 'varchar', // DB에서 인지하는 컬럼타입
+    name: 'user_title', // DB 컬럼명, 미입력시 변수명으로 자동 입력
+    length: 300, // 입력 글자 최대 길이
+    nullable: true, // null 가능 여부
+    update: true, // false 시 처음 저장시에만 값 지정이 가능하며 이후 값 변경 불가
+    select: true, // 값 요청시 기본으로 가져올지 여부, false시 값을 요청해도 해당 값은 가져오지 않음 (sql select)
+    default: 'default value', // 값 미입력시 기본으로 입력되는 값
+    unique: false, // 컬럼 중 유일한 값이어야 하는지 여부
+  })
   title: string;
 
   // 데이터가 생성되는 날짜, 시간이 자동으로 입력

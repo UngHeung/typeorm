@@ -13,7 +13,7 @@ export class AppController {
   @Post('users')
   createUser() {
     return this.userRepository.save({
-      title: 'test title',
+      // title: 'test title',
     });
   }
 
