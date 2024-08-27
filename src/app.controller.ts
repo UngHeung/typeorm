@@ -1,5 +1,5 @@
 import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Not, Repository } from 'typeorm';
+import { Equal, ILike, LessThan, LessThanOrEqual, Like, MoreThan, MoreThanOrEqual, Not, Repository } from 'typeorm';
 import { UserModel } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProfileModel } from './entity/profile.entity';
@@ -49,7 +49,22 @@ export class AppController {
       // },
       // and는 같은 객체, or는 list로 객체들을 넣어주면 된다.
       where: {
-        id: Not(8),
+        // 아닌 값 가져오기
+        // id: Not(8), // 8이 아닌 값
+        // 적은 경우 가져오기
+        // id: LessThan(10),
+        // 적거나 같은 경우
+        // id: LessThanOrEqual(10),
+        // 큰경우
+        // id: MoreThan(95),
+        // 크거나 같은 경우
+        // id: MoreThanOrEqual(95),
+        // 같은 값 가져오기
+        // id: Equal(30),
+        // 유사값
+        // email: Like('%1@%'),
+        // email: Like('%eMail%'), // 대소문자를 구분한다.
+        email: ILike('%eMail%'), // 구분하지 않는다.
       },
       // // relations : user를 불러올 때 profile을 같이 가져온다.
       // relations: {
