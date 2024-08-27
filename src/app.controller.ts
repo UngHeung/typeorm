@@ -41,6 +41,15 @@ export class AppController {
         createAt: true,
         updateAt: true,
       },
+      // and는 같은 객체, or는 list로 객체들을 넣어주면 된다.
+      where: [
+        {
+          id: 3,
+        },
+        {
+          version: 1,
+        },
+      ],
     });
   }
 
