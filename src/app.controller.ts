@@ -62,6 +62,9 @@ export class AppController {
       order: {
         id: 'ASC', // 오름차순
       },
+      // (정렬된 값을)앞에서부터 건너뛸 값
+      skip: 0, // default 0
+      take: 0, // default 0 - 0은 전부
     });
   }
 
