@@ -1,5 +1,5 @@
 import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { UserModel } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProfileModel } from './entity/profile.entity';
@@ -20,10 +20,12 @@ export class AppController {
   ) {}
 
   @Post('/users')
-  createUser() {
-    return this.userRepository.save({
-      // role: 'another role'
-    });
+  async createUser() {
+    for (let i = 0; i < 100; i++) {
+      await this.userRepository.save({
+        email: `user-${i}@email.com`,
+      });
+    }
   }
 
   @Get('/users')
@@ -36,35 +38,30 @@ export class AppController {
       // 어떤 property를 선택할지 정할 수 있다.
       // default : 모든 프로퍼티
       // select : 정의된 프로퍼티
-      select: {
-        id: true,
-        createAt: true,
-        updateAt: true,
-        // relations: profile에서는 id만
-        profile: {
-          id: true,
-        },
-      },
+      // select: {
+      //   id: true,
+      //   createAt: true,
+      //   updateAt: true,
+      //   // relations: profile에서는 id만
+      //   profile: {
+      //     id: true,
+      //   },
+      // },
       // and는 같은 객체, or는 list로 객체들을 넣어주면 된다.
-      where: [
-        {
-          id: 3,
-        },
-        {
-          version: 1,
-        },
-      ],
-      // relations : user를 불러올 때 profile을 같이 가져온다.
-      relations: {
-        profile: true,
+      where: {
+        id: Not(8),
       },
-      // 오름차순(ASC), 내림차순(DESC)
-      order: {
-        id: 'ASC', // 오름차순
-      },
-      // (정렬된 값을)앞에서부터 건너뛸 값
-      skip: 0, // default 0
-      take: 0, // default 0 - 0은 전부
+      // // relations : user를 불러올 때 profile을 같이 가져온다.
+      // relations: {
+      //   profile: true,
+      // },
+      // // 오름차순(ASC), 내림차순(DESC)
+      // order: {
+      //   id: 'ASC', // 오름차순
+      // },
+      // // (정렬된 값을)앞에서부터 건너뛸 값
+      // skip: 0, // default 0
+      // take: 0, // default 0 - 0은 전부
     });
   }
 
