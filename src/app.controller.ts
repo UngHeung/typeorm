@@ -29,8 +29,17 @@ export class AppController {
   @Get('/users')
   getUsers() {
     return this.userRepository.find({
-      relations: {
-        posts: true,
+      // relations: {
+      //   posts: true,
+      // },
+
+      // 어떤 property를 선택할지 정할 수 있다.
+      // default : 모든 프로퍼티
+      // select : 정의된 프로퍼티
+      select: {
+        id: true,
+        createAt: true,
+        updateAt: true,
       },
     });
   }

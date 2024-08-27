@@ -60,7 +60,7 @@ export class UserModel {
 
   @OneToOne(() => ProfileModel, (profile) => profile.user, {
     // find() 실행 시 해당 ralation을 항상 같이 가져온다.
-    eager: true,
+    eager: false,
     // 저장 시 relation도 같이 함께 저장된다.
     cascade: true,
     // null이 가능한지 여부
