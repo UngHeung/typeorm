@@ -40,6 +40,10 @@ export class AppController {
         id: true,
         createAt: true,
         updateAt: true,
+        // relations: profile에서는 id만
+        profile: {
+          id: true,
+        },
       },
       // and는 같은 객체, or는 list로 객체들을 넣어주면 된다.
       where: [
@@ -50,6 +54,9 @@ export class AppController {
           version: 1,
         },
       ],
+      relations: {
+        profile: true,
+      },
     });
   }
 
