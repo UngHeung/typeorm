@@ -54,8 +54,13 @@ export class AppController {
           version: 1,
         },
       ],
+      // relations : user를 불러올 때 profile을 같이 가져온다.
       relations: {
         profile: true,
+      },
+      // 오름차순(ASC), 내림차순(DESC)
+      order: {
+        id: 'ASC', // 오름차순
       },
     });
   }
