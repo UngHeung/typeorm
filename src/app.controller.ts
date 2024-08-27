@@ -1,5 +1,5 @@
 import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Between, Equal, ILike, LessThan, LessThanOrEqual, Like, MoreThan, MoreThanOrEqual, Not, Repository } from 'typeorm';
+import { Between, Equal, ILike, In, LessThan, LessThanOrEqual, Like, MoreThan, MoreThanOrEqual, Not, Repository } from 'typeorm';
 import { UserModel } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProfileModel } from './entity/profile.entity';
@@ -61,7 +61,8 @@ export class AppController {
         // id: MoreThanOrEqual(95),
         // 같은 값 가져오기
         // id: Equal(30),
-        id: Between(10, 15),
+        // id: Between(10, 15),
+        id: In([8, 9, 11, 15]),
 
         // 유사값
         // email: Like('%1@%'),
